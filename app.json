@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "Suomalaiset korttipelit online",
+    "description": "Suomalaiset korttipelit online",
+    "slug": "mobile",
+    "privacy": "public",
+    "sdkVersion": "27.0.0",
+    "platforms": ["ios", "android"],
+    "version": "1.0.2",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#000000"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "versionCode": 2,
+      "package": "com.patriktorn.korttipelit"
+    }
+  }
+}
