@@ -1,0 +1,11 @@
+.row {
+  position: relative;
+  padding-top: 1vw;
+}
+
+.title {
+  position: absolute;
+  top: 0;
+  line-height: 1vw;
+  font-size: 1vw;
+}
