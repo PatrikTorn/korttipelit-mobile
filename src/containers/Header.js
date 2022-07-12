@@ -6,42 +6,43 @@ import { colors } from "../constants";
 class Header extends React.Component {
   render() {
     const user = this.props.user;
-    console.log(this.props);
     const { navigation } = this.props;
-    const { routeName } = navigation.state;
-    // user.fbId = "2034164583273480";
+    const { routes } = navigation.getState();
+    const routeName = routes[routes.length - 1].name;
     return (
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.profile(routeName === "Profile")}
-          onPress={() => navigation.navigate("Profile")}
-        >
-          <Image
-            style={styles.coin}
-            source={
-              user.fbId
-                ? {
-                    uri: `http://graph.facebook.com/${user.fbId}/picture?type=square`,
-                  }
-                : require("../images/user_icon.png")
-            }
-          />
-          <Text style={styles.text}>{user.name}</Text>
-        </TouchableOpacity>
+      <View style={styles.headerContainer}>
+        <View style={styles.header}>
+          <TouchableOpacity
+            style={styles.profile(routeName === "Profile")}
+            onPress={() => navigation.navigate("Profile")}
+          >
+            <Image
+              style={styles.coin}
+              source={
+                user.fbId
+                  ? {
+                      uri: `http://graph.facebook.com/${user.fbId}/picture?type=square`,
+                    }
+                  : require("../images/user_icon.png")
+              }
+            />
+            <Text style={styles.text}>{user.name}</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.game(routeName === "Lobby")}
-          onPress={() => navigation.navigate("Lobby")}
-        >
-          <Image
-            style={{ width: 150, height: 45 }}
-            source={require("../images/logo_text.png")}
-          />
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.game(routeName === "Lobby")}
+            onPress={() => navigation.navigate("Lobby")}
+          >
+            <Image
+              style={{ width: 150, height: 45 }}
+              source={require("../images/logo_text.png")}
+            />
+          </TouchableOpacity>
 
-        <View style={styles.money}>
-          <Image style={styles.coin} source={require("../images/coin.png")} />
-          <Text style={styles.text}>{user.money}</Text>
+          <View style={styles.money}>
+            <Image style={styles.coin} source={require("../images/coin.png")} />
+            <Text style={styles.text}>{user.money}</Text>
+          </View>
         </View>
       </View>
     );
@@ -59,11 +60,14 @@ const styles = {
     color: "white",
     fontSize: 25,
   },
+  headerContainer: {
+    height: 60,
+    backgroundColor: "transparent",
+  },
   header: {
-    flex: 0.15,
+    flex: 1,
     backgroundColor: "rgba(0,0,0,0.9)",
     flexDirection: "row",
-    height: 80,
     width: "100%",
   },
   profile: (active) => ({

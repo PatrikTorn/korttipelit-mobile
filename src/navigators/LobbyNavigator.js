@@ -6,12 +6,21 @@ import Queue from "../containers/Lobby/Queue";
 import React from "react";
 import Header from "../containers/Header";
 import { createAppContainer } from "react-navigation";
+import { Text, View } from "react-native";
 
 const Stack = createStackNavigator();
 
 export default () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          height: 60, // Specify the height of your custom header
+        },
+        //
+        header: ({ navigation }) => <Header navigation={navigation} />,
+      }}
+    >
       <Stack.Screen name="Lobby" component={Lobby} />
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Queue" component={Queue} />
@@ -19,27 +28,3 @@ export default () => {
     </Stack.Navigator>
   );
 };
-// export default createAppContainer(
-//   createStackNavigator(
-//     {
-//       // For each screen that you can navigate to, create a new entry like this:
-//       Lobby,
-//       Profile,
-//       Queue,
-//       Players,
-//     },
-//     {
-//       headerMode: "screen",
-//       headerStyle: {
-//         height: 80, // Specify the height of your custom header
-//       },
-//       navigationOptions: ({ navigation }) => ({
-//         header: <Header navigation={navigation} />,
-//         headerMode: "screen",
-//         headerStyle: {
-//           height: 80, // Specify the height of your custom header
-//         },
-//       }),
-//     }
-//   )
-// );

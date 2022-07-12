@@ -1,12 +1,9 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import store from "./src/store";
-import ScreenContainer from "./src/containers/ScreenContainer";
-import { Provider } from "react-redux";
-import { StatusBar } from "react-native";
 import * as ScreenOrientation from "expo-screen-orientation";
-import { Permissions, Notifications } from "expo";
-import { LoginButton } from "./src/components";
+import React from "react";
+import { StatusBar } from "react-native";
+import { Provider } from "react-redux";
+import ScreenContainer from "./src/containers/ScreenContainer";
+import store from "./src/store";
 
 console.disableYellowBox = true;
 
