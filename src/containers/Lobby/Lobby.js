@@ -9,6 +9,7 @@ import {
 import { Connect } from "../../actions";
 import { Button, ListButton } from "../../components";
 import { SOCKET_SERVER_ACTIONS } from "../../constants";
+import { RoomType } from "../../types";
 import Footer from "./Footer";
 
 const images = {
@@ -41,8 +42,8 @@ class Lobby extends React.Component {
   getPlayersAmount(gameType) {
     return this.props.common.rooms.reduce((acc, room) => {
       if (
-        (room.type === "queue" && room.config.gameType === gameType) ||
-        (room.type === "game" && room.gameType === gameType)
+        (room.type === RoomType.Queue && room.config.gameType === gameType) ||
+        (room.type === RoomType.Game && room.gameType === gameType)
       ) {
         return acc + room.players.length;
       } else {
@@ -87,16 +88,16 @@ class Lobby extends React.Component {
       {
         name: "Paskahousu",
         color: "brown",
-        onPress: () => this.setState({ gameType: "paskahousu" }),
-        playersAmount: this.getPlayersAmount("paskahousu"),
+        onPress: () => this.setState({ gameType: RoomType.Paskahousu }),
+        playersAmount: this.getPlayersAmount(RoomType.Paskahousu),
       },
       {
         name: "Tikkipokeri",
         color: "green",
         onPress: () => {
-          this.setState({ gameType: "tikkipokeri" });
+          this.setState({ gameType: RoomType.Tikkipokeri });
         },
-        playersAmount: this.getPlayersAmount("tikkipokeri"),
+        playersAmount: this.getPlayersAmount(RoomType.Tikkipokeri),
       },
       {
         name: "Mustamaija",
@@ -171,7 +172,7 @@ class Lobby extends React.Component {
       >
         {items.map((room) => {
           const thisRoom = this.props.common.rooms
-            .filter((r) => r.type === "queue")
+            .filter((r) => r.type === RoomType.Queue)
             .find((r) => r.id === this.createGameId(room));
           return (
             <ListButton
@@ -185,7 +186,7 @@ class Lobby extends React.Component {
               }
               bet={room.bet}
               pointLimit={
-                this.state.gameType === "tikkipokeri" && room.pointLimit
+                this.state.gameType === RoomType.Tikkipokeri && room.pointLimit
               }
               color={room.color}
               playersAmount={

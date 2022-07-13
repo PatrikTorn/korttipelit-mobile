@@ -132,7 +132,6 @@ class Paskahousu extends React.Component {
             }
           </div>
         ))}
-        {/* {firstTableCard && <div className="tableCenter"><Card data={firstTableCard} visible={true} onClick={() => console.log("ASD")}/></div>} */}
       </Table>
     );
   }

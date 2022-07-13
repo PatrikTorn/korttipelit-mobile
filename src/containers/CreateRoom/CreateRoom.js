@@ -1,9 +1,10 @@
 import React from "react";
 import "./CreateRoom.css";
 import { Button, Input } from "../../components";
+import { RoomType } from "../../types";
 export default class CreateRoom extends React.Component {
   state = {
-    gameType: "tikkipokeri",
+    gameType: RoomType.Tikkipokeri,
     playersAmount: 2,
     bet: 50,
     pointLimit: 10,
@@ -23,7 +24,7 @@ export default class CreateRoom extends React.Component {
 
         <div className="row">
           <i className="title">Peli:</i>{" "}
-          {["paskahousu", "tikkipokeri"].map((game) => (
+          {[RoomType.Paskahousu, RoomType.Tikkipokeri].map((game) => (
             <Button
               onClick={() => this.setState({ gameType: game })}
               active={this.state.gameType === game}
@@ -47,7 +48,7 @@ export default class CreateRoom extends React.Component {
           ))}
         </div>
 
-        {this.state.gameType === "tikkipokeri" && (
+        {this.state.gameType === RoomType.Tikkipokeri && (
           <div>
             <div className="row">
               <i className="title">Panos:</i>{" "}

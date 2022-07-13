@@ -4,6 +4,7 @@ import { Connect } from "../actions";
 import { SOCKET_CLIENT_ACTIONS } from "../constants";
 import AuthNavigator from "../navigators/AuthNavigator";
 import LobbyNavigator from "../navigators/LobbyNavigator";
+import { RoomType } from "../types";
 import Game from "./Game/Game";
 
 class ScreenContainer extends React.Component {
@@ -40,7 +41,7 @@ class ScreenContainer extends React.Component {
         </NavigationContainer>
       );
     } else if (this.props.user.room.type) {
-      if (this.props.user.room.type === "game") {
+      if (this.props.user.room.type === RoomType.Game) {
         return <Game gameType={this.props.user.room.gameType} />;
       } else
         return (

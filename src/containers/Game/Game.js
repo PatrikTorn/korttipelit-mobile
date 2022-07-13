@@ -5,6 +5,7 @@ import TikkipokeriPlayer from "./TikkipokeriPlayer";
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import Menu from "./Menu";
 import { SOCKET_SERVER_ACTIONS } from "../../constants";
+import { RoomType } from "../../types";
 // import {Card, Table, PointList, Timer} from '../../components';
 
 class Game extends React.Component {
@@ -29,7 +30,7 @@ class Game extends React.Component {
   changeCards(me) {
     const cards = me.cards.filter((card) => card.selected);
     const name =
-      this.type === "paskahousu"
+      this.type === RoomType.Paskahousu
         ? SOCKET_SERVER_ACTIONS.PASKAHOUSU.CHANGE_CARDS
         : SOCKET_SERVER_ACTIONS.TIKKIPOKERI.CHANGE_CARDS;
     this.props.socket.emit(name, cards);
@@ -113,7 +114,7 @@ class Game extends React.Component {
   }
 
   onClickCard({ player, card }) {
-    if (this.type === "paskahousu") {
+    if (this.type === RoomType.Paskahousu) {
       this.props.socket.emit(SOCKET_SERVER_ACTIONS.PASKAHOUSU.TAKE_CARD, card);
     } else {
       if (player.cardsChanged) {
@@ -139,7 +140,7 @@ class Game extends React.Component {
 
     const Player = ({ player, i }) => {
       switch (this.type) {
-        case "paskahousu":
+        case RoomType.Paskahousu:
           return (
             <TikkipokeriPlayer player={player} i={i} amount={players.length} />
           );
@@ -149,14 +150,11 @@ class Game extends React.Component {
           );
       }
     };
-    //     {player.cards.filter(c => c.selected).length > 0 && <button onClick={() => this.myTurn(player) && this.changeCards(player)}>Vaihda</button>}
-    //     {!player.cardTaken && <button onClick={() => this.myTurn(player) && this.takeCard(player)}>Nosta pakasta</button>}
-    //     {table.length > 0 && <button onClick={() => this.myTurn(player) && this.takeTable(player)}>Nosta pöytä</button>}
 
     const GameActions = () => {
       const cardsSelected = me.cards.filter((c) => c.selected).length > 0;
       switch (this.type) {
-        case "paskahousu":
+        case RoomType.Paskahousu:
           return (
             <View style={styles.centerRow}>
               <View style={{ flex: 0.25 }}>
