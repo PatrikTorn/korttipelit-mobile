@@ -13,7 +13,6 @@ export default class CreateRoom extends React.Component {
   render() {
     return (
       <center style={{ color: "white" }}>
-        {/* <button className="playBot" onClick={() => this.props.onClick(this.state)}>Luo huone</button> */}
         <Input
           onChange={(name) => this.setState({ name })}
           placeholder="Huoneen nimi"

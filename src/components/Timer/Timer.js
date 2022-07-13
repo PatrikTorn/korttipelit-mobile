@@ -1,5 +1,6 @@
 import React from "react";
 import { Connect } from "../../actions";
+import { SOCKET_SERVER_ACTIONS } from "../../constants";
 
 class Timer extends React.Component {
   state = {
@@ -44,7 +45,7 @@ class Timer extends React.Component {
     }
 
     if (turnEnds && this.state.isRunning && this.state.timeLeft < 0) {
-      this.props.socket.emit("miss turn");
+      this.props.socket.emit(SOCKET_SERVER_ACTIONS.GAME.MISS_TURN);
       this.stopTimer();
     }
     return (

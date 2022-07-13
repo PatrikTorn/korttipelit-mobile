@@ -2,6 +2,7 @@ import React from "react";
 import { Card } from "../../components/Card";
 import { View, Text } from "react-native";
 import { Connect } from "../../actions";
+import { SOCKET_SERVER_ACTIONS } from "../../constants";
 
 class TikkipokeriPlayer extends React.Component {
   myTurn() {
@@ -29,11 +30,11 @@ class TikkipokeriPlayer extends React.Component {
   }
 
   selectCard(card) {
-    this.props.socket.emit("select card", card);
+    this.props.socket.emit(SOCKET_SERVER_ACTIONS.TIKKIPOKERI.SELECT_CARD, card);
   }
 
   tableCard(card) {
-    this.props.socket.emit("table card", card);
+    this.props.socket.emit(SOCKET_SERVER_ACTIONS.TIKKIPOKERI.TABLE_CARD, card);
   }
 
   validateName(name) {

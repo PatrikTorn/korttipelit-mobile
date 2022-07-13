@@ -2,6 +2,7 @@ import React from "react";
 import { ActivityIndicator, Text } from "react-native";
 import { Connect } from "../../actions";
 import { Button, Container, Modal, PlayerList } from "../../components";
+import { SOCKET_SERVER_ACTIONS } from "../../constants";
 
 function sendNotification({ to, title, body, type, roomId, from }) {
   return fetch("https://exp.host/--/api/v2/push/send", {
@@ -32,12 +33,12 @@ class Queue extends React.Component {
   }
 
   leaveRoom() {
-    this.props.socket.emit("join room", "lobby");
+    this.props.socket.emit(SOCKET_SERVER_ACTIONS.ROOM.JOIN_ROOM, "lobby");
     this.props.navigation.navigate("Lobby");
   }
 
   playOffline() {
-    this.props.socket.emit("play offline");
+    this.props.socket.emit(SOCKET_SERVER_ACTIONS.ROOM.PLAY_OFFLINE);
   }
 
   loadPlayers() {

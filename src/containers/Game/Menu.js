@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { sortPlayers } from "../../tools/gameTools";
 import { Connect } from "../../actions";
+import { SOCKET_SERVER_ACTIONS } from "../../constants";
 
 class Menu extends React.Component {
   state = {
@@ -9,7 +10,7 @@ class Menu extends React.Component {
   };
 
   exitGame() {
-    this.props.socket.emit("exit game");
+    this.props.socket.emit(SOCKET_SERVER_ACTIONS.ROOM.EXIT_GAME);
   }
 
   render() {

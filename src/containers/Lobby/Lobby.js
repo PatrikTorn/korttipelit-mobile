@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { Connect } from "../../actions";
 import { Button, ListButton } from "../../components";
+import { SOCKET_SERVER_ACTIONS } from "../../constants";
 import Footer from "./Footer";
 
 const images = {
@@ -26,11 +27,11 @@ class Lobby extends React.Component {
   }
 
   joinRoom(roomName) {
-    this.props.socket.emit("join room", roomName);
+    this.props.socket.emit(SOCKET_SERVER_ACTIONS.ROOM.JOIN_ROOM, roomName);
   }
 
   playOffline() {
-    this.props.socket.emit("play offline");
+    this.props.socket.emit(SOCKET_SERVER_ACTIONS.ROOM.PLAY_OFFLINE);
   }
 
   createGameId(room) {
@@ -77,7 +78,7 @@ class Lobby extends React.Component {
   }
 
   joinRoom(data) {
-    this.props.socket.emit("create room", data);
+    this.props.socket.emit(SOCKET_SERVER_ACTIONS.ROOM.CREATE_ROOM, data);
     this.props.navigation.navigate("Queue", { roomDetails: data });
   }
 

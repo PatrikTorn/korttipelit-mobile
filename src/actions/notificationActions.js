@@ -1,6 +1,7 @@
 import { Permissions, Notifications } from "expo";
 import { createActionPointers } from "../tools/actionTools";
 import { AsyncStorage } from "react-native";
+import { SOCKET_SERVER_ACTIONS } from "../constants";
 
 export const actions = createActionPointers([
   `REGISTER_NOTIFICATIONS`,
@@ -34,7 +35,7 @@ export const registerNotifications = () => async (dispatch, getState) => {
       }
     }
     const token = await Notifications.getExpoPushTokenAsync();
-    socket.emit("set notification token", token);
+    socket.emit(SOCKET_SERVER_ACTIONS.AUTH.SET_NOTIFICATION_TOKEN, token);
     this.subscription = Notifications.addListener((n) =>
       dispatch(showNotification(n))
     );

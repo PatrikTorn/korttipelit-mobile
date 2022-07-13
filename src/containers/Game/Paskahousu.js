@@ -1,6 +1,7 @@
 import React from "react";
 import { Connect } from "../../actions";
 import { Card, Table, Timer } from "../../components";
+import { SOCKET_SERVER_ACTIONS } from "../../constants";
 import "./Game.css";
 class Paskahousu extends React.Component {
   myTurn(player) {
@@ -15,15 +16,18 @@ class Paskahousu extends React.Component {
 
   changeCards(player) {
     const cards = player.cards.filter((card) => card.selected);
-    this.props.socket.emit("PH change cards", cards);
+    this.props.socket.emit(
+      SOCKET_SERVER_ACTIONS.PASKAHOUSU.CHANGE_CARDS,
+      cards
+    );
   }
 
   takeCard(player) {
-    this.props.socket.emit("PH take card");
+    this.props.socket.emit(SOCKET_SERVER_ACTIONS.PASKAHOUSU.TAKE_CARD);
   }
 
   takeTable(player) {
-    this.props.socket.emit("PH take table");
+    this.props.socket.emit(SOCKET_SERVER_ACTIONS.PASKAHOUSU.TAKE_TABLE);
   }
 
   onClickCard({ player, card }) {
@@ -32,7 +36,7 @@ class Paskahousu extends React.Component {
   }
 
   selectCard(card) {
-    this.props.socket.emit("PH click card", card);
+    this.props.socket.emit(SOCKET_SERVER_ACTIONS.PASKAHOUSU.CLICK_CARD, card);
   }
 
   getPlayers(players) {

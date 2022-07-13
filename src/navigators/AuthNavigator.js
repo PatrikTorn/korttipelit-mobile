@@ -15,17 +15,3 @@ export default () => {
     </Stack.Navigator>
   );
 };
-
-// export default createAppContainer(
-//   createStackNavigator(
-//     {
-//       // For each screen that you can navigate to, create a new entry like this:
-//       LoginMenu,
-//       Login,
-//       Register,
-//     },
-//     {
-//       headerMode: "screen",
-//     }
-//   )
-// );

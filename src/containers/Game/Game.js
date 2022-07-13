@@ -4,6 +4,7 @@ import { Table, Card, Button } from "../../components";
 import TikkipokeriPlayer from "./TikkipokeriPlayer";
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import Menu from "./Menu";
+import { SOCKET_SERVER_ACTIONS } from "../../constants";
 // import {Card, Table, PointList, Timer} from '../../components';
 
 class Game extends React.Component {
@@ -28,16 +29,18 @@ class Game extends React.Component {
   changeCards(me) {
     const cards = me.cards.filter((card) => card.selected);
     const name =
-      this.type === "paskahousu" ? "PH change cards" : "change cards";
+      this.type === "paskahousu"
+        ? SOCKET_SERVER_ACTIONS.PASKAHOUSU.CHANGE_CARDS
+        : SOCKET_SERVER_ACTIONS.TIKKIPOKERI.CHANGE_CARDS;
     this.props.socket.emit(name, cards);
   }
 
   takeCard() {
-    this.props.socket.emit("PH take card");
+    this.props.socket.emit(SOCKET_SERVER_ACTIONS.PASKAHOUSU.TAKE_CARD);
   }
 
   takeTable() {
-    this.props.socket.emit("PH take table");
+    this.props.socket.emit(SOCKET_SERVER_ACTIONS.PASKAHOUSU.TAKE_TABLE);
   }
 
   getPlayers(players) {
@@ -111,7 +114,7 @@ class Game extends React.Component {
 
   onClickCard({ player, card }) {
     if (this.type === "paskahousu") {
-      this.props.socket.emit("PH click card", card);
+      this.props.socket.emit(SOCKET_SERVER_ACTIONS.PASKAHOUSU.TAKE_CARD, card);
     } else {
       if (player.cardsChanged) {
         this.tableCard(card);
@@ -122,11 +125,11 @@ class Game extends React.Component {
   }
 
   selectCard(card) {
-    this.props.socket.emit("select card", card);
+    this.props.socket.emit(SOCKET_SERVER_ACTIONS.TIKKIPOKERI.SELECT_CARD, card);
   }
 
   tableCard(card) {
-    this.props.socket.emit("table card", card);
+    this.props.socket.emit(SOCKET_SERVER_ACTIONS.TIKKIPOKERI.TABLE_CARD, card);
   }
 
   render() {

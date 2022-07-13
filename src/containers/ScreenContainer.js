@@ -1,29 +1,35 @@
 import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
-import { StyleSheet } from "react-native";
 import { Connect } from "../actions";
+import { SOCKET_CLIENT_ACTIONS } from "../constants";
 import AuthNavigator from "../navigators/AuthNavigator";
 import LobbyNavigator from "../navigators/LobbyNavigator";
 import Game from "./Game/Game";
-import Test from "./Test";
-const TEST_GAME = false;
 
 class ScreenContainer extends React.Component {
   constructor(props) {
     super(props);
     const socket = this.props.socket;
-    socket.on("disconnect", (reason) => {
-      alert("dis1");
-    });
-    socket.on("disconnected", (reason) => {
-      alert("dis2");
-    });
-    socket.on("get rooms", (rooms) => this.props.setRooms(rooms));
-    socket.on("get sockets", (sockets) => this.props.setSockets(sockets));
-    socket.on("get socket", (user) => this.props.setUser(user));
-    socket.on("get game", (game) => this.props.setGame(game));
-    socket.on("reset game", () => this.props.resetGame());
-    console.log(this.props);
+    socket.on(SOCKET_CLIENT_ACTIONS.DISCONNECT, (reason) =>
+      this.notifyDisconnect()
+    );
+    socket.on(SOCKET_CLIENT_ACTIONS.GET_ROOMS, (rooms) =>
+      this.props.setRooms(rooms)
+    );
+    socket.on(SOCKET_CLIENT_ACTIONS.GET_SOCKETS, (sockets) =>
+      this.props.setSockets(sockets)
+    );
+    socket.on(SOCKET_CLIENT_ACTIONS.GET_SOCKET, (user) =>
+      this.props.setUser(user)
+    );
+    socket.on(SOCKET_CLIENT_ACTIONS.GET_GAME, (game) =>
+      this.props.setGame(game)
+    );
+    socket.on(SOCKET_CLIENT_ACTIONS.RESET_GAME, () => this.props.resetGame());
+  }
+
+  notifyDisconnect() {
+    alert("Yhteys palvelimeen on katkennut. Käynnistä sovellus uudelleen.");
   }
 
   render() {
@@ -43,20 +49,7 @@ class ScreenContainer extends React.Component {
           </NavigationContainer>
         );
     }
-    if (TEST_GAME) {
-      return <Test />;
-    }
   }
 }
 
 export default Connect(ScreenContainer);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#282c34",
-    alignItems: "center",
-    justifyContent: "center",
-    color: "white",
-  },
-});

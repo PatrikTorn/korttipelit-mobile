@@ -10,6 +10,7 @@ import { Input, Container, LoginButton } from "../../components";
 import { Connect } from "../../actions";
 import axios from "axios";
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
+import { SOCKET_SERVER_ACTIONS } from "../../constants";
 
 class LoginMenu extends React.Component {
   state = {
@@ -17,7 +18,6 @@ class LoginMenu extends React.Component {
     loading: true,
   };
   componentDidMount() {
-    // this.props.socket.emit('set name', 'patu');
     this.timer = setTimeout(() => {
       this.setState({ loading: false });
       AsyncStorage.removeItem("name");
@@ -32,8 +32,10 @@ class LoginMenu extends React.Component {
   async watchUser() {
     const name = await AsyncStorage.getItem("name");
     const fbId = await AsyncStorage.getItem("fbId");
-    if (fbId) this.props.socket.emit("login", { fbId });
-    else if (name) this.props.socket.emit("set name", name);
+    if (fbId)
+      this.props.socket.emit(SOCKET_SERVER_ACTIONS.AUTH.LOGIN, { fbId });
+    else if (name)
+      this.props.socket.emit(SOCKET_SERVER_ACTIONS.AUTH.SET_NAME, name);
     else this.setState({ loading: false });
   }
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { Input, Container, Button } from "../../components";
 import { Connect } from "../../actions";
+import { SOCKET_SERVER_ACTIONS } from "../../constants";
 class Register extends React.Component {
   state = {
     name: null,
@@ -21,7 +22,7 @@ class Register extends React.Component {
         <Button
           className="userButton"
           onPress={() =>
-            this.props.socket.emit("register", {
+            this.props.socket.emit(SOCKET_SERVER_ACTIONS.AUTH.REGISTER, {
               name: this.state.name,
               password: this.state.password,
             })

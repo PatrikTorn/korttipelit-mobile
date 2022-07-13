@@ -8,7 +8,6 @@ class Footer extends React.Component {
     try {
       await AsyncStorage.removeItem("name");
       await AsyncStorage.removeItem("fbId");
-      // this.props.socket.emit('logout');
       this.props.logout();
     } catch (e) {
       console.log(e);
