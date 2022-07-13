@@ -1,6 +1,6 @@
 import { createActionPointers } from "../tools/actionTools";
 import axios from "axios";
-const ENDPOINT = "https://kortti.herokuapp.com";
+import { ENDPOINT } from "../constants";
 export const actions = createActionPointers([
   `SET_ROOMS`,
   "SET_SOCKETS",

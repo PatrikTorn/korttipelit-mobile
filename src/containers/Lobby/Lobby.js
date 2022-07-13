@@ -203,9 +203,6 @@ class Lobby extends React.Component {
   }
 
   render() {
-    const { rooms } = this.props.common;
-    const user = this.props.user;
-
     return (
       <ImageBackground
         source={images.wallpaper}
@@ -270,7 +267,6 @@ const styles = {
   container: {
     flex: 1,
     flexDirection: "column",
-    // backgroundColor: 'rgba(0,0,0,0.6)',
   },
   text: {
     color: "white",
